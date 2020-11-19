@@ -1,0 +1,48 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: true
+
+spring:
+  datasource:
+    #        driver-class-name: org.mariadb.jdbc.Driver
+    #        url: jdbc:mysql://localhost:3306/testDB?serverTimezone=UTC
+    #        username: root
+    #        password: mariadb
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./test_db;AUTO_SERVER=TRUE
+    username: sa
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        #                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.H2Dialect
+        ddl-auto: update
+    generate-ddl: true
+  jackson:
+    time-zone: UTC
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 500MB
+      max-request-size: 515MB
+  h2:
+    console:
+      enabled: true
+      path: /console
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: info

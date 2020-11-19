@@ -1,0 +1,94 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+	<title>회원 가입</title>
+	<meta name="description" content="Join us">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--  <link rel="manifest" href="resources/site.webmanifest">-->
+	<link rel="apple-touch-icon" href="../icon.png">
+	<!-- Place favicon.ico in the root directory -->
+
+	<!-- <link rel="shortcut icon" href="resources/favicon.ico">-->
+	<link rel="icon" href="../favicon.ico">
+
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link rel="stylesheet" href="../css/login.css">
+
+	<meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<!-- Add your site or application content here -->
+<div class="container_LF">
+	<div class="card form-box">
+		<div class="card-body">
+			<form th:action="join" id="form_join" name="joinForm" method="post">
+				<div class="form-group">
+					<div class="form-label">
+						아이디 <input id="form_join_button_check_duplicate_id" type="button" value="중복체크" class="# ml15" maxlength="30">
+						<span id="form_join_span_notify_input_id" class="text-red"></span>
+					</div>
+					<div><input id="form_join_input_id" type="text" name="id" class="form-input"></div>
+
+				</div>
+				<div class="form-group">
+					<div class="form-label input-size-100">
+						비밀번호 <span id="form_join_span_notify_input_pw" class="text-red"></span>
+					</div>
+					<div><input id="form_join_input_pw" type="password" name="pwd" class="form-input" maxlength="20"></div>
+				</div>
+				<div class="form-group">
+					<div class="form-label input-size-100">
+						비밀번호 확인 <span id="form_join_span_notify_input_confirm_pw" class="text-red"></span>
+					</div>
+					<div><input id="form_join_input_confirm_pw" type="password" class="form-input" maxlength="20"></div>
+				</div>
+				<div class="form-group">
+					<div class="form-label input-size-100">
+						이름 <span id="form_join_span_notify_input_name" class="text-black"></span>
+					</div>
+					<div><input id="form_join_input_name" type="text" name="name" class="form-input" maxlength="10"></div>
+				</div>
+				<div class="form-group">
+					<div class="form-label input-size-100">
+						이메일 <span id="form_join_span_notify_input_email" class="text-black"></span>
+					</div>
+					<div><input id="form_join_input_email" type="email" name="email" class="form-input" placeholder="archivsoft@archivsoft.com"></div>
+				</div>
+				<div class="form-group">
+					<div class="form-label input-size-100">
+						전화번호 <span id="form_join_span_notify_input_phone" class="text-black"></span>
+					</div>
+					<div><input id="form_join_input_phone" type="tel" name="phone" pattern="[0-9]{12}" class="form-input" placeholder="특수문자 없이 숫자만 입력 가능합니다." maxlength="12"></div>
+				</div>
+				<div class="form-group">
+					<div class="form-label input-size-100">관리사무소</div>
+					<div>
+						<select name="cate_code" th:if="${categories!=null}" class="form-input">
+							<option value="All" th:each="category : ${categories}" th:object="${category}" th:if="!${#strings.equals(category.cate_code,'CD00')}" th:value="*{cate_code}" th:text="*{cate_name}">전체</option>
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div style="margin-bottom: 5vh;">
+		<input id="button_submit_form_join" type="button" value="등록" class="btn btn-primary">
+		<input id="button_cancel_form_join" type="button" value="취소" class="btn btn-danger">
+	</div>
+</div>
+
+<script src="../js/vendor/modernizr-3.8.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/joinForm.js"></script>
+
+</body>
+
+</html>

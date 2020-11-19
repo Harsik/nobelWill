@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8">
+  <title>로그인 화면</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--  <link rel="manifest" href="resources/site.webmanifest">-->
+  <link rel="apple-touch-icon" href="/icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- <link rel="shortcut icon" href="resources/favicon.ico">-->
+  <link rel="icon" href="/img/favicon.ico">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/login.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<!-- Add your site or application content here -->
+<div class="container_login">
+  <div class="make_space">
+    <img src="/img/login_avatar.png" alt="Archivsoft Logo">
+  </div>
+  <div class="hr-sect">
+    SIGN UP & SIGN IN
+  </div>
+  <form id="form_login" th:action="@{/login}" method="post">
+    <div th:if="${errorMsg!=null} " th:text="${errorMsg}" class="text-red"></div>
+    <div>
+      <label>
+        <input id="form_login_input_id" type="text" placeholder="ID" name="id" class="btn_box">
+      </label>
+      <div id="form_login_span_notify_input_id" class="text-red"></div>
+    </div>
+    <div>
+      <label>
+        <input id="form_login_input_pw" type="password" placeholder="PASSWORD" name="pwd" class="btn_box">
+      </label>
+      <div id="form_login_span_notify_input_pw" class="text-red"></div>
+    </div>
+    <div style="text-align: left; padding-left: 8.5%">
+      <label>
+        <input id="form_login_checkbox_remember_id" type="checkbox" value="Y"> ID 저장하기
+      </label>
+    </div>
+    <div>
+      <input id="button_submit_form_login" value="Sign in" class="button">
+      <input onClick="location.href='joinform'" value="Sign up" class="button">
+    </div>
+  </form>
+</div>
+
+<script src="../js/vendor/modernizr-3.8.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/login.js"></script>
+
+</body>
+
+</html>
