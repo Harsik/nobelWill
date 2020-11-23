@@ -1,7 +1,14 @@
 package com.archivsoft.nobelWill.model;
 
+import com.archivsoft.nobelWill.util.PemFile;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
+
+import java.io.*;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+
+import static org.hibernate.bytecode.BytecodeLogger.LOGGER;
 
 public class Wlt {
 	public PrivateKey privateKey;
@@ -24,5 +31,40 @@ public class Wlt {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public String createPemPrivate() throws IOException {
+		StringWriter writer = new StringWriter();
+		PemWriter pemWriter = new PemWriter(writer);
+		pemWriter.writeObject(new PemObject("Private KEY", privateKey.getEncoded()));
+		pemWriter.flush();
+		pemWriter.close();
+		return writer.toString();
+	}
+
+	public String createPemPublic() throws IOException {
+		StringWriter writer = new StringWriter();
+		PemWriter pemWriter = new PemWriter(writer);
+		pemWriter.writeObject(new PemObject("PUBLIC KEY", publicKey.getEncoded()));
+		pemWriter.flush();
+		pemWriter.close();
+		return writer.toString();
+	}
+
+//	private KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
+//		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA", "BC");
+//		generator.initialize(KEY_SIZE);
+//
+//		KeyPair keyPair = generator.generateKeyPair();
+//		LOGGER.info("RSA key pair generated.");
+//		return keyPair;
+//	}
+
+	public void writePemFile(Key key, String description, String filename)
+			throws FileNotFoundException, IOException {
+		PemFile pemFile = new PemFile(key, description);
+		pemFile.write(filename);
+
+		LOGGER.info(String.format("%s successfully writen in file %s.", description, filename));
 	}
 }

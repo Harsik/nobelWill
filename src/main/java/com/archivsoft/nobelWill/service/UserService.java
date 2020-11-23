@@ -4,8 +4,6 @@ import com.archivsoft.nobelWill.model.Role;
 import com.archivsoft.nobelWill.model.User;
 import com.archivsoft.nobelWill.payload.SignRequest;
 import com.archivsoft.nobelWill.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

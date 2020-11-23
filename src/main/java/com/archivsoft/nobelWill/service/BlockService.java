@@ -1,8 +1,12 @@
 package com.archivsoft.nobelWill.service;
 
 import com.archivsoft.nobelWill.model.Block;
+import com.archivsoft.nobelWill.model.Wlt;
 import com.google.gson.GsonBuilder;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Service
@@ -10,6 +14,8 @@ public class BlockService {
 
     public ArrayList<Block> blockchain = new ArrayList<Block>();
     public int difficulty = 1;
+    public Wlt WltA;
+    public Wlt WltB;
 
     public String makeBlock(){
         blockchain.add(new Block("Genesis block", "0"));
@@ -59,4 +65,19 @@ public class BlockService {
         }
         return true;
     }
+    public void genekey() throws IOException {
+
+        WltA = new Wlt();
+        WltB = new Wlt();
+
+        WltA.generateKeyPair();
+        System.out.println("WltA.privateKey : " + WltA.privateKey.toString());
+        System.out.println("WltA.publicKey : " + WltA.publicKey.toString());
+        System.out.println("WltA.createPemPrivate : " + WltA.createPemPrivate());
+        System.out.println("WltA.createPemPublic : " + WltA.createPemPublic());
+
+        WltA.writePemFile(WltA.privateKey, "RSA PRIVATE KEY", "id_rsa");
+        WltA.writePemFile(WltA.publicKey, "RSA PUBLIC KEY", "id_rsa.pub");
+    }
+
 }
